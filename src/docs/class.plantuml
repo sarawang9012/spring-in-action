@@ -1,0 +1,44 @@
+@startuml
+
+' Define the TacoOrder class
+class TacoOrder {
+  -deliveryName : String
+  -deliveryStreet : String
+  -deliveryCity : String
+  -deliveryState : String
+  -deliveryZip : String
+  -ccNumber : String
+  -ccExpiration : String
+  -ccCVV : String
+}
+
+' Define the Taco class
+class Taco {
+  -name : String
+}
+
+' Define the Ingredient class
+class Ingredient {
+  -id : String
+  -name : String
+  -type : String
+}
+
+' Define the IngredientType enumeration
+enum IngredientType {
+  WRAP
+  PROTEIN
+  VEGGIES
+  CHEESE
+  SAUCE
+}
+
+' Define relationships
+TacoOrder "1" *-- "*" Taco : contains >
+Taco "*" o-- "*" Ingredient : includes
+Ingredient "1" -- "1" IngredientType : has >
+
+' TacoOrder "1" *-- "*" Taco : contains
+' Taco "1" o-- "*" Ingredient : includes
+' Taco "1" -- "*" Ingredient : uses
+@enduml

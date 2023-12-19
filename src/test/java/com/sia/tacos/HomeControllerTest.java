@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
  * @Create 2023/12/13 10:45
  * @Version 1.0
  */
-@WebMvcTest(HomeController.class)
+@WebMvcTest()
 public class HomeControllerTest {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
