@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link th:href="@{/index.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .order {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-header {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .order-details, .taco-details {
+            margin-left: 20px;
+        }
+
+        .taco {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{common/header :: headerFragment}"></header>
+
+<main>
+    <section>
+
+
+
+        <h1>Taco Orders</h1>
+
+        <!-- Sample Order -->
+        <div class="order" th:each="order: ${orders}">
+            <div class="order-header" th:text="${order.id}">Order #1</div>
+            <div class="flex justify-between">
+                <div class="order-details">
+                    <strong>Delivery Information:</strong><br>
+                    <p>Name: <span th:text="${order.deliveryName}"></span></p>
+                    <p>Street: <span th:text="${order.deliveryStreet}"></span></p>
+                    <p>City: <span th:text="${order.deliveryCity}"></span></p>
+                    <p>State: <span th:text="${order.deliveryState}"></span></p>
+                    <p>Zip Code: <span th:text="${order.deliveryZip}"></span></p>
+                    <p>Placed at: <span th:text="${order.placedAt}"></span></p>
+                    <!-- More delivery details -->
+                </div>
+                <div class="order-details">
+                    <strong>Credit Card Information:</strong>
+                    <p>Card Number: <span th:text="${order.ccNumber}"></span></p>
+                    <p>Expiry Date: <span th:text="${order.ccExpiration}"></span></p>
+                    <p>Card CVV: <span th:text="${order.ccCVV}"></span></p>
+                </div>
+            </div>
+            <div class="taco-details" th:each="taco : ${order.tacos}">
+                <div class="taco">
+                    <strong>Taco <span th:text="${taco.id}"></span></strong>
+                    <p>Name: <span th:text="${taco.name}"></span></p>
+                    <p>Ingredients:</p>
+                    <div class="flex justify-left">
+                    <div
+                         th:each="ingredient: ${taco.ingredients}" class="mx-4">
+
+                        <div th:text="${ingredient.name}"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:replace="~{common/footer :: footerFragment}"></footer>
+</body>
+</html>

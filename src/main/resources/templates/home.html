@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Home / Taco Cloud</title>
+    <link th:href="@{/index.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel="stylesheet">
 </head>
 <body>
+<header th:replace="~{common/header :: headerFragment}"></header>
+<main>
     <h1>Welcome to...</h1>
-
-    <img th:src="@{/images/TacoCloud.png}" />
+    <img th:src="@{/images/TacoCloud.png}"/>
+</main>
+<footer th:replace="~{common/footer :: footerFragment}"></footer>
 </body>
 
 </html>

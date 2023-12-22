@@ -1,8 +1,15 @@
-package com.sia.tacos.controllers;
+package com.sia.tacos.controller;
 
-import com.sia.tacos.TacoOrder;
+import com.sia.tacos.model.Taco;
+import com.sia.tacos.model.TacoOrder;
+import com.sia.tacos.repository.IngredientRepository;
+import com.sia.tacos.repository.OrderRepository;
+import com.sia.tacos.repository.TacoRepository;
+import com.sia.tacos.service.TacoCloudService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,6 +31,17 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes("tacoOrder")
 public class OrderController {
 
+    private final OrderRepository orderRepository;
+    private final TacoRepository tacoRepository;
+
+    private final TacoCloudService service;
+    @Autowired
+    public OrderController(OrderRepository orderRepository, TacoRepository tacoRepository,
+                           TacoCloudService service){
+        this.orderRepository = orderRepository;
+        this.tacoRepository = tacoRepository;
+        this.service = service;
+    }
     @GetMapping("/current")
     public String orderForm() {
         return "orderForm";
@@ -45,8 +63,17 @@ public class OrderController {
             return "orderForm";
         }
         log.info("Order submitted: {}", order);
+        orderRepository.save(order);
         sessionStatus.setComplete();
 
-        return "redirect:/";
+        return "redirect:/orders";
+    }
+
+    @GetMapping
+    public String getOrders(Model model){
+        Iterable<TacoOrder> orders = service.findAllOrders();
+        model.addAttribute("orders",orders);
+        return "orders";
+
     }
 }

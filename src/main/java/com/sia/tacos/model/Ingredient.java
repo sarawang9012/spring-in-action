@@ -1,4 +1,4 @@
-package com.sia.tacos;
+package com.sia.tacos.model;
 import lombok.Data;
 
 /**

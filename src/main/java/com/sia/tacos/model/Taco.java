@@ -1,8 +1,9 @@
-package com.sia.tacos;
+package com.sia.tacos.model;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -22,4 +23,9 @@ public class Taco {
     @NotNull
     @Size(min=1, message = "You must choose at least 1 ingredient")
     private List<Ingredient> ingredients;
+    private Long tacoOrder;
+    private Long tacoOrderKey;
+    private Long id;
+    private LocalDateTime createdAt;
+
 }
