@@ -16,6 +16,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.time.LocalDateTime;
+
 /**
  * ClassName: OrderController
  * Package: com.sia.tacos
@@ -63,6 +65,7 @@ public class OrderController {
             return "orderForm";
         }
         log.info("Order submitted: {}", order);
+        order.setPlacedAt(LocalDateTime.now());
         orderRepository.save(order);
         sessionStatus.setComplete();
 

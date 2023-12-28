@@ -1,7 +1,11 @@
 package com.sia.tacos.repository;
 
 import com.sia.tacos.model.Taco;
+import com.sia.tacos.model.TacoOrder;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * ClassName: TacoRepository
@@ -12,9 +16,8 @@ import org.springframework.stereotype.Repository;
  * @Create 2023/12/22 11:12
  * @Version 1.0
  */
-@Repository
-public interface TacoRepository {
-    Taco getById(Long tacoId);
-    Iterable<Taco> getByOrderId(Long orderId);
+public interface TacoRepository extends CrudRepository<Taco, Long> {
+//    Iterable<Taco> getByOrderId(Long orderId);
 
+    Iterable<Taco> findByTacoOrder(TacoOrder order);
 }

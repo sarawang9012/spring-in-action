@@ -43,6 +43,7 @@ public class DesignTacoController {
     public void addIngredientsToModel(Model model) {
 
         List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
+        System.out.println(ingredients);
         Ingredient.Type[] types = Ingredient.Type.values();
         for (Ingredient.Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
@@ -85,6 +86,7 @@ public class DesignTacoController {
             return "design";
         }
         tacoOrder.addTaco(taco);
+        taco.setTacoOrder(tacoOrder);
         log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";
     }

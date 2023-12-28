@@ -1,6 +1,7 @@
 package com.sia.tacos.repository;
 
 import com.sia.tacos.model.Ingredient;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -15,9 +16,6 @@ import java.util.Optional;
  * @Version 1.0
  */
 
-public interface IngredientRepository {
-    Iterable<Ingredient> findAll();
-    Optional<Ingredient> findById(String id);
-    Ingredient save(Ingredient ingredient);
+public interface IngredientRepository extends CrudRepository<Ingredient, String> {
 
 }
